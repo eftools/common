@@ -45,6 +45,7 @@ package inobr.eft.common.ui
 		private static var windowLink:Sprite;
 		private static var stageLink:Stage;
 		private static var blender:Shape;
+		public static const NOTIFICATION_CLOSED:String = "notificationClosed";
 		
 		/**
 		 * Create window with user text and specified width. Height of the window is determined 
@@ -234,6 +235,7 @@ package inobr.eft.common.ui
 		private static function onCloseButtonClick(event:MouseEvent):void
 		{
 			closeButtonLink.removeEventListener(MouseEvent.MOUSE_DOWN, onCloseButtonClick);
+			windowLink.stage.dispatchEvent(new Event(NOTIFICATION_CLOSED, true));
 			stageLink.removeChild(windowLink);
 			stageLink.removeChild(blender);
 		}
