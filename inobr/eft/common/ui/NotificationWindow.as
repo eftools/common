@@ -26,10 +26,6 @@ package inobr.eft.common.ui
 		private static var windowWidth:uint  = 350;
 		private static var windowHeight:uint = 30;
 		
-		/* window position */
-		private static var windowX:int = 100;
-		private static var windowY:int = 80;
-		
 		/* colors and decorations */
         private static var bgGreenColor:uint      = 0x81C66D;
 		private static var bgRedColor:uint        = 0xFF6D6D;
@@ -211,10 +207,11 @@ package inobr.eft.common.ui
 		{
 			windowLink.removeEventListener(Event.ADDED_TO_STAGE, stageHandler);
 			closeButtonLink.addEventListener(MouseEvent.MOUSE_DOWN, onCloseButtonClick);
+			stageLink.addEventListener(MouseEvent.CLICK, clickOutsideHandler, true);
 			
 			/* The window located in the middle of the Stage. */
-			windowLink.x = (stageLink.width - windowLink.width) / 2;
-			windowLink.y = windowY + 0.5;
+			windowLink.x = int((stageLink.stageWidth - windowLink.width) / 2) + 0.5;
+			windowLink.y = int((stageLink.stageHeight - windowLink.height) / 2) + 0.5;
 			
 			/* Create blackout on the Stage */
 			blender = new Shape();
@@ -227,6 +224,11 @@ package inobr.eft.common.ui
 			stageLink.swapChildrenAt(stageLink.getChildIndex(windowLink), stageLink.getChildIndex(blender));
 		}
 		
+		private static function clickOutsideHandler(event:MouseEvent):void 
+		{
+			remove();
+		}
+		
 		/**
 		 * Destroy the window and its listeners
 		 * 
@@ -234,8 +236,14 @@ package inobr.eft.common.ui
 		 */
 		private static function onCloseButtonClick(event:MouseEvent):void
 		{
+			remove();
+		}
+		
+		private static function remove():void
+		{
 			closeButtonLink.removeEventListener(MouseEvent.MOUSE_DOWN, onCloseButtonClick);
 			windowLink.stage.dispatchEvent(new Event(NOTIFICATION_CLOSED, true));
+			stageLink.removeEventListener(MouseEvent.CLICK, clickOutsideHandler, true);
 			stageLink.removeChild(windowLink);
 			stageLink.removeChild(blender);
 		}
