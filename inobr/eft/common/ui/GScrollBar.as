@@ -11,7 +11,7 @@ package inobr.eft.common.ui
 	
 	/**
 	 * ...
-	 * @author gps
+	 * @author Peter Gerasimenko, gpstmp@gmail.com
 	 */
 	public class GScrollBar extends Sprite 
 	{

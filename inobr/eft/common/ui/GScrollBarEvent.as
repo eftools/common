@@ -8,7 +8,7 @@ package inobr.eft.common.ui
 	 * this Event with the name of Class given.
 	 *
 	 * ...
-	 * @author gps
+	 * @author Peter Gerasimenko, gpstmp@gmail.com
 	 */
 	public class GScrollBarEvent extends Event 
 	{

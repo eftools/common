@@ -2,7 +2,7 @@ package inobr.eft.common.ui
 {
 	/**
 	 * ...
-	 * @author Peter Gerasimenko (gpstmp@gmail.com)
+	 * @author Peter Gerasimenko, gpstmp@gmail.com
 	 */
 	public class BlockFormat extends Object
 	{
@@ -13,13 +13,18 @@ package inobr.eft.common.ui
 		private var _marginHorizontal:uint;
 		private var _marginVertical:uint;
 		
-		public function BlockFormat():void
+		/**
+		 * Format for rectangle
+		 * @param	options set any option like an object field: {blockFill: 0xFF0000, borderWidth: 1}
+		 */
+		public function BlockFormat(options:Object = null):void
 		{
-			_blockFill = 0xFFFFFF;
-			_borderColor = 0x000000;
-			_borderWidth = 2;
-			_marginHorizontal = 10;
-			_marginVertical = 10;
+			if (!options) options = { };
+			_blockFill = options.blockFill || 0xFFFFFF;
+			_borderColor = options.borderColor || 0x000000;
+			_borderWidth = options.borderWidth || 2;
+			_marginHorizontal = options.marginHorizontal || 10;
+			_marginVertical = options.marginVertical || 10;
 		}
 		
 		public function set blockFill(setValue:uint):void

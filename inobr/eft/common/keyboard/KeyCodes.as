@@ -3,7 +3,7 @@ package inobr.eft.common.keyboard
 	/**
 	 * KeyCodes enum
 	 * 
-	 * @author Artem Andreev (andreev.artem@gmail.com)
+	 * @author Artem Andreev, andreev.artem@gmail.com
 	 */
 	public class KeyCodes 
 	{

@@ -22,7 +22,7 @@ package inobr.eft.common.ui
 	 * This made in order to assign job of managing the margins on GScrollPane class.
 	 * 
 	 * ...
-	 * @author gps
+	 * @author Peter Gerasimenko, gpstmp@gmail.com
 	 */
 	public class GScrollPane extends Sprite 
 	{

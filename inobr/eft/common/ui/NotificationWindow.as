@@ -15,7 +15,7 @@ package inobr.eft.common.ui
 	/**
 	 * Create Notification Window with user text
 	 * ...
-	 * @author gps
+	 * @author Peter Gerasimenko, gpstmp@gmail.com
 	 */
 	public class NotificationWindow extends Sprite
 	{

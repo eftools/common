@@ -10,7 +10,7 @@ package
 	 * Contains all the classes and graphics from
 	 * fla-file in order to generate full swc-file.
 	 * 
-	 * @author Peter Gerasimenko (gpstmp@gmail.com)
+	 * @author Peter Gerasimenko, gpstmp@gmail.com
 	 */
 	public class Common extends Sprite 
 	{
