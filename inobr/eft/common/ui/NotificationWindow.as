@@ -40,7 +40,7 @@ package inobr.eft.common.ui
 		private static var closeButtonLink:SimpleButton;
 		private static var windowLink:Sprite;
 		private static var stageLink:Stage;
-		private static var blender:Shape;
+		private static var blender:Sprite;
 		public static const NOTIFICATION_CLOSED:String = "notificationClosed";
 		
 		/**
@@ -94,8 +94,6 @@ package inobr.eft.common.ui
 			/* All of the window put in one container called "window" 
 			 * use this container if you are going to make your own window style */
 			var window:Sprite = new Sprite();
-			//addChild(window);
-			//windowLink = window;
 			
 			/* the text of the header */
 			var headerText:TextField = new TextField();
@@ -205,28 +203,30 @@ package inobr.eft.common.ui
 		 */
 		private static function stageHandler(event:Event):void
 		{
-			windowLink.removeEventListener(Event.ADDED_TO_STAGE, stageHandler);
-			closeButtonLink.addEventListener(MouseEvent.MOUSE_DOWN, onCloseButtonClick);
-			stageLink.addEventListener(MouseEvent.CLICK, clickOutsideHandler, true);
-			
 			/* The window located in the middle of the Stage. */
 			windowLink.x = int((stageLink.stageWidth - windowLink.width) / 2) + 0.5;
 			windowLink.y = int((stageLink.stageHeight - windowLink.height) / 2) + 0.5;
 			
 			/* Create blackout on the Stage */
-			blender = new Shape();
-			blender.graphics.beginFill(bgBlendColor, 0.5);
-			blender.graphics.drawRect(0, 0, stageLink.stageWidth, stageLink.stageHeight);
-            blender.graphics.endFill();
+			blender = new Sprite();
+			var blenderBack:Shape = new Shape();
+			blenderBack.graphics.beginFill(bgBlendColor, 0.5);
+			blenderBack.graphics.drawRect(0, 0, stageLink.stageWidth, stageLink.stageHeight);
+            blenderBack.graphics.endFill();
+			blender.addChild(blenderBack);
 			
 			stageLink.addChild(blender);
 			/* swap blackout and the window (window must be on top) */
 			stageLink.swapChildrenAt(stageLink.getChildIndex(windowLink), stageLink.getChildIndex(blender));
+			
+			windowLink.removeEventListener(Event.ADDED_TO_STAGE, stageHandler);
+			closeButtonLink.addEventListener(MouseEvent.MOUSE_DOWN, onCloseButtonClick);
+			blender.addEventListener(MouseEvent.CLICK, clickOutsideHandler);
 		}
 		
 		private static function clickOutsideHandler(event:MouseEvent):void 
 		{
-			remove();
+			event.stopPropagation();
 		}
 		
 		/**
@@ -243,7 +243,7 @@ package inobr.eft.common.ui
 		{
 			closeButtonLink.removeEventListener(MouseEvent.MOUSE_DOWN, onCloseButtonClick);
 			windowLink.stage.dispatchEvent(new Event(NOTIFICATION_CLOSED, true));
-			stageLink.removeEventListener(MouseEvent.CLICK, clickOutsideHandler, true);
+			blender.removeEventListener(MouseEvent.CLICK, clickOutsideHandler);
 			stageLink.removeChild(windowLink);
 			stageLink.removeChild(blender);
 		}
