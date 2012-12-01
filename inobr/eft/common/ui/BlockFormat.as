@@ -20,11 +20,11 @@ package inobr.eft.common.ui
 		public function BlockFormat(options:Object = null):void
 		{
 			if (!options) options = { };
-			_blockFill = options.blockFill || 0xFFFFFF;
-			_borderColor = options.borderColor || 0x000000;
-			_borderWidth = options.borderWidth || 2;
-			_marginHorizontal = options.marginHorizontal || 10;
-			_marginVertical = options.marginVertical || 10;
+			_blockFill = options.blockFill === undefined ? 0xFFFFFF : options.blockFill;
+			_borderColor = options.borderColor === undefined ? 0x000000 : options.borderColor;
+			_borderWidth = options.borderWidth === undefined ? 2 : options.borderWidth;
+			_marginHorizontal = options.marginHorizontal === undefined ? 10 : options.marginHorizontal;
+			_marginVertical = options.marginVertical === undefined ? 10 : options.marginVertical;
 		}
 		
 		public function set blockFill(setValue:uint):void
