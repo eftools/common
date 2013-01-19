@@ -144,6 +144,17 @@ package inobr.eft.common.ui
 			}
 		}
 		
+		private function scrollToButtom():void
+		{
+			var difference:int = _scrollMask.height - _content.height - format.marginVertical;
+			_content.y = difference;
+			
+			// if we change position of content we must change position 
+			// of track in scrollbar
+			verticalScrollBar.sY = Math.floor(format.borderWidth / 2 - (_content.y - format.marginVertical) / 
+								   verticalScrollIndex);
+		}
+		
 		/**
 		 * Response to the change in position of the Track in GScrollBar 
 		 * 
@@ -272,6 +283,7 @@ package inobr.eft.common.ui
 			else
 			{
 				showVerticalScrollBar();
+				scrollToButtom();
 			}
 			
 			// if width of container becomes less than scrollMask area 
